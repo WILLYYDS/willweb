@@ -8,25 +8,25 @@ export default function Experience() {
   const experiences = [
     {
       title: "Full Stack Engineer, Intern",
-      company: "Gotchoo Inc",
-      location: "Los Angeles, CA",
-      period: "03/20/2024–06/20/2024",
+      company: "TechInnovate Solutions",
+      location: "San Francisco, CA",
+      period: "06/2024–09/2024",
       points: [
-        "Developed a one-click gift-giving feature using ReactJS, HTMX, AWS",
-        "Championed user privacy with an innovative SaaS-based framework",
+        "Developed a one-click feature using ReactJS, HTMX, AWS",
+        "Implemented user privacy measures with an innovative SaaS-based framework",
         "Deployed AWS cloud services and integrated Stripe",
-        "Optimized the online gift-giving process, boosting sales by 25%"
+        "Optimized key processes, resulting in a 25% increase in efficiency"
       ],
       skills: ["ReactJS", "AWS", "Stripe", "Node.js"]
     },
     {
       title: "Full Stack Engineer, Intern",
-      company: "Vision X, LLC",
+      company: "DataDrive Systems",
       location: "San Jose, CA",
-      period: "6/30/2023–8/30/2023",
+      period: "06/2023–08/2023",
       points: [
         "Designed and implemented a full-stack web application",
-        "Contributed to AI-powered content generation algorithm",
+        "Contributed to AI-powered data analysis algorithms",
         "Created reusable ReactJS component library",
         "Implemented RESTful web services in Python"
       ],

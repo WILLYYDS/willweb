@@ -1,6 +1,8 @@
 "use client"
 
-import { motion } from 'framer-motion'
+import { motion, useAnimation } from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
+import { useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 export default function Skills() {
@@ -23,6 +25,15 @@ export default function Skills() {
     }
   ]
 
+  const controls = useAnimation()
+  const [ref, inView] = useInView()
+
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible')
+    }
+  }, [controls, inView])
+
   return (
     <section id="skills" className="py-20 bg-background">
       <div className="container px-4">
@@ -34,34 +45,46 @@ export default function Skills() {
         >
           Skills & Interests
         </motion.h2>
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-8" ref={ref}>
           {skillCategories.map((category, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial="hidden"
+              animate={controls}
+              variants={{
+                visible: { opacity: 1, y: 0 },
+                hidden: { opacity: 0, y: 50 }
+              }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
             >
-              <Card className="h-full">
+              <Card className="h-full overflow-hidden">
                 <CardHeader>
                   <CardTitle className="text-xl font-semibold">
                     {category.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  <motion.div 
+                    className="grid grid-cols-2 sm:grid-cols-3 gap-2"
+                    variants={{
+                      visible: { transition: { staggerChildren: 0.1 } }
+                    }}
+                  >
                     {category.skills.map((skill, i) => (
-                      <motion.span
+                      <motion.div
                         key={i}
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ delay: i * 0.1 }}
-                        className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium text-center"
+                        variants={{
+                          hidden: { opacity: 0, scale: 0.8 },
+                          visible: { opacity: 1, scale: 1 }
+                        }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium text-center cursor-pointer transition-colors hover:bg-primary hover:text-primary-foreground"
                       >
                         {skill}
-                      </motion.span>
+                      </motion.div>
                     ))}
-                  </div>
+                  </motion.div>
                 </CardContent>
               </Card>
             </motion.div>
